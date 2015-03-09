@@ -41,17 +41,21 @@
 
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="Parkinson's Detector" Style="{StaticResource PhoneTextNormalStyle}" Margin="12,0" FontSize="48"/>
+            <TextBlock Text="Parkinson's Detector" Style="{StaticResource PhoneTextNormalStyle}" Margin="12,0" FontSize="48" Foreground="#FF1C91E2"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <TextBlock HorizontalAlignment="Left" Margin="74,107,0,0" TextWrapping="Wrap" Text="X :" VerticalAlignment="Top" FontSize="48"/>
-            <TextBlock HorizontalAlignment="Left" Margin="74,215,0,0" TextWrapping="Wrap" Text="Y :" VerticalAlignment="Top" FontSize="48"/>
-            <TextBlock HorizontalAlignment="Left" Margin="74,313,0,0" TextWrapping="Wrap" Text="Z :" VerticalAlignment="Top" FontSize="48"/>
-            <TextBlock x:Name="AccXLabel" HorizontalAlignment="Left" Margin="131,107,0,0" TextWrapping="Wrap" Text="N/A" VerticalAlignment="Top" Height="64" Width="298" FontSize="48" TextAlignment="Center"/>
-            <TextBlock x:Name="AccYLabel" HorizontalAlignment="Left" Margin="131,215,0,0" TextWrapping="Wrap" Text="N/A" VerticalAlignment="Top" Height="64" Width="298" FontSize="48" TextAlignment="Center"/>
-            <TextBlock x:Name="AccZLabel" HorizontalAlignment="Left" Margin="131,313,0,0" TextWrapping="Wrap" Text="N/A" VerticalAlignment="Top" Height="64" Width="298" FontSize="48" TextAlignment="Center"/>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="203*"/>
+                <ColumnDefinition Width="253*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock HorizontalAlignment="Left" Margin="52,107,0,0" TextWrapping="Wrap" Text="X :" VerticalAlignment="Top" FontSize="48"/>
+            <TextBlock HorizontalAlignment="Left" Margin="52,215,0,0" TextWrapping="Wrap" Text="Y :" VerticalAlignment="Top" FontSize="48"/>
+            <TextBlock HorizontalAlignment="Left" Margin="52,313,0,0" TextWrapping="Wrap" Text="Z :" VerticalAlignment="Top" FontSize="48"/>
+            <TextBlock x:Name="AccXLabel" HorizontalAlignment="Left" Margin="109,107,0,0" TextWrapping="Wrap" Text="N/A" VerticalAlignment="Top" Height="64" Width="298" FontSize="48" TextAlignment="Center" Grid.ColumnSpan="2"/>
+            <TextBlock x:Name="AccYLabel" HorizontalAlignment="Left" Margin="109,215,0,0" TextWrapping="Wrap" Text="N/A" VerticalAlignment="Top" Height="64" Width="298" FontSize="48" TextAlignment="Center" Grid.ColumnSpan="2"/>
+            <TextBlock x:Name="AccZLabel" HorizontalAlignment="Left" Margin="109,313,0,0" TextWrapping="Wrap" Text="N/A" VerticalAlignment="Top" Height="64" Width="298" FontSize="48" TextAlignment="Center" Grid.ColumnSpan="2"/>
 
         </Grid>
 
