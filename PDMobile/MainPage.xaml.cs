@@ -11,6 +11,8 @@ using PDMobile.Resources;
 
 using Microsoft.Devices.Sensors;
 using Windows.Storage;
+using Windows.Storage.Streams;
+using System.Diagnostics;
 
 namespace PDMobile
 {
@@ -18,7 +20,9 @@ namespace PDMobile
     {
         private Accelerometer accelerometer;
 
-        private StorageFolder storageFolder;
+        private StorageFile storageFile;
+
+        private ulong seekLocation = 0;
 
         public MainPage()
         {
@@ -30,7 +34,7 @@ namespace PDMobile
             }
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
 
@@ -49,6 +53,9 @@ namespace PDMobile
             {
                 MessageBox.Show("Accelerometer could not be started successfully. Please restart the app.");
             }
+
+            StorageFolder storageFolder = await ApplicationData.Current.LocalFolder.CreateFolderAsync(Stopwatch.GetTimestamp().ToString());
+            storageFile = await storageFolder.CreateFileAsync("data.csv", CreationCollisionOption.ReplaceExisting);
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
@@ -66,6 +73,7 @@ namespace PDMobile
         void accelerometer_CurrentValueChanged(object sender, SensorReadingEventArgs<AccelerometerReading> e)
         {
             Dispatcher.BeginInvoke(() => UpdateUI(e.SensorReading));
+            Dispatcher.BeginInvoke(() => WriteData(e.SensorReading));
         }
 
         private void UpdateUI(AccelerometerReading reading)
@@ -73,6 +81,33 @@ namespace PDMobile
             AccXLabel.Text = reading.Acceleration.X.ToString();
             AccYLabel.Text = reading.Acceleration.Y.ToString();
             AccZLabel.Text = reading.Acceleration.Z.ToString();
+        }
+
+        private async void WriteData(AccelerometerReading reading)
+        {
+            if (storageFile == null)
+            {
+                return;
+            }
+
+            String x = reading.Acceleration.X.ToString();
+            String y = reading.Acceleration.Y.ToString();
+            String z = reading.Acceleration.Z.ToString();
+
+            String line = x + ";" + y + ";" + z + "\n";
+            
+            using (IRandomAccessStream stream = await storageFile.OpenAsync(FileAccessMode.ReadWrite))
+            {
+                IOutputStream outStream = stream.GetOutputStreamAt(seekLocation);
+                
+                using (DataWriter writer = new DataWriter(outStream))
+                {
+                    writer.WriteString(line);
+                    await writer.StoreAsync();
+
+                    seekLocation += (ulong)System.Text.Encoding.UTF8.GetByteCount(line);
+                }
+            }
         }
     }
 }
