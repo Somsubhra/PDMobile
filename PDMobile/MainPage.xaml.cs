@@ -95,19 +95,37 @@ namespace PDMobile
             String z = reading.Acceleration.Z.ToString();
 
             String line = x + ";" + y + ";" + z + "\n";
-            
-            using (IRandomAccessStream stream = await storageFile.OpenAsync(FileAccessMode.ReadWrite))
-            {
-                IOutputStream outStream = stream.GetOutputStreamAt(seekLocation);
-                
-                using (DataWriter writer = new DataWriter(outStream))
-                {
-                    writer.WriteString(line);
-                    await writer.StoreAsync();
 
-                    seekLocation += (ulong)System.Text.Encoding.UTF8.GetByteCount(line);
+            try
+            {
+                using (IRandomAccessStream stream = await storageFile.OpenAsync(FileAccessMode.ReadWrite))
+                {
+                    IOutputStream outStream = stream.GetOutputStreamAt(seekLocation);
+
+                    using (DataWriter writer = new DataWriter(outStream))
+                    {
+                        writer.WriteString(line);
+                        await writer.StoreAsync();
+
+                        seekLocation += (ulong)System.Text.Encoding.UTF8.GetByteCount(line);
+                    }
                 }
             }
+            catch (Exception) { }
+        }
+
+        private void Background_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            Background.Visibility = System.Windows.Visibility.Collapsed;
+            BackgroundLabel.Visibility = System.Windows.Visibility.Collapsed;
+            Content.Visibility = System.Windows.Visibility.Visible;
+        }
+
+        private void Content_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            Content.Visibility = System.Windows.Visibility.Collapsed;
+            Background.Visibility = System.Windows.Visibility.Visible;
+            BackgroundLabel.Visibility = System.Windows.Visibility.Visible;
         }
     }
 }

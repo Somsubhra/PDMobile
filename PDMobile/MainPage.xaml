@@ -41,22 +41,32 @@
 
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="Parkinson's Detector" Style="{StaticResource PhoneTextNormalStyle}" Margin="12,0" FontSize="48" Foreground="#FF1C91E2"/>
+            <TextBlock Text="Parkinson's Detector" Style="{StaticResource PhoneTextNormalStyle}" Margin="17,0,7,0" FontSize="48" Foreground="#FF1C91E2"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0" Tap="Content_Tap">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="203*"/>
                 <ColumnDefinition Width="253*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock HorizontalAlignment="Left" Margin="52,107,0,0" TextWrapping="Wrap" Text="X :" VerticalAlignment="Top" FontSize="48"/>
-            <TextBlock HorizontalAlignment="Left" Margin="52,215,0,0" TextWrapping="Wrap" Text="Y :" VerticalAlignment="Top" FontSize="48"/>
-            <TextBlock HorizontalAlignment="Left" Margin="52,313,0,0" TextWrapping="Wrap" Text="Z :" VerticalAlignment="Top" FontSize="48"/>
-            <TextBlock x:Name="AccXLabel" HorizontalAlignment="Left" Margin="109,107,0,0" TextWrapping="Wrap" Text="N/A" VerticalAlignment="Top" Height="64" Width="298" FontSize="48" TextAlignment="Center" Grid.ColumnSpan="2"/>
-            <TextBlock x:Name="AccYLabel" HorizontalAlignment="Left" Margin="109,215,0,0" TextWrapping="Wrap" Text="N/A" VerticalAlignment="Top" Height="64" Width="298" FontSize="48" TextAlignment="Center" Grid.ColumnSpan="2"/>
-            <TextBlock x:Name="AccZLabel" HorizontalAlignment="Left" Margin="109,313,0,0" TextWrapping="Wrap" Text="N/A" VerticalAlignment="Top" Height="64" Width="298" FontSize="48" TextAlignment="Center" Grid.ColumnSpan="2"/>
-
+            <TextBlock x:Name="BackgroundLabel" HorizontalAlignment="Left" Margin="10,473,0,0" TextWrapping="Wrap" Text="Collecting Data..." VerticalAlignment="Top" Grid.ColumnSpan="2" Width="446" FontSize="48" TextAlignment="Center" Foreground="#FF1C91E2"/>
+        </Grid>
+        <Grid HorizontalAlignment="Left" Height="100" Margin="404,358,-24,0" Grid.Row="1" VerticalAlignment="Top" Width="100">
+            <Image x:Name="Background" HorizontalAlignment="Left" Height="444" Margin="-383,-304,0,-40" VerticalAlignment="Top" Width="431" Source="/Assets/Background.png" Tap="Background_Tap"/>
+            
+            <Grid x:Name="Content" HorizontalAlignment="Left" Height="260" Margin="-348,-214,0,0" VerticalAlignment="Top" Width="383" Tap="Content_Tap" Visibility="Collapsed">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="156*"/>
+                    <ColumnDefinition Width="227*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock HorizontalAlignment="Left" Margin="22,-6,0,0" TextWrapping="Wrap" Text="X :" VerticalAlignment="Top" FontSize="48"/>
+                <TextBlock HorizontalAlignment="Left" Margin="22,102,0,0" TextWrapping="Wrap" Text="Y :" VerticalAlignment="Top" FontSize="48"/>
+                <TextBlock HorizontalAlignment="Left" Margin="22,200,0,-4" TextWrapping="Wrap" Text="Z :" VerticalAlignment="Top" FontSize="48"/>
+                <TextBlock x:Name="AccXLabel" HorizontalAlignment="Left" Margin="79,-6,0,0" TextWrapping="Wrap" Text="N/A" VerticalAlignment="Top" Height="64" Width="298" FontSize="48" TextAlignment="Center" Grid.ColumnSpan="2"/>
+                <TextBlock x:Name="AccYLabel" HorizontalAlignment="Left" Margin="79,102,0,0" TextWrapping="Wrap" Text="N/A" VerticalAlignment="Top" Height="64" Width="298" FontSize="48" TextAlignment="Center" Grid.ColumnSpan="2"/>
+                <TextBlock x:Name="AccZLabel" HorizontalAlignment="Left" Margin="79,200,0,-4" TextWrapping="Wrap" Text="N/A" VerticalAlignment="Top" Height="64" Width="298" FontSize="48" TextAlignment="Center" Grid.ColumnSpan="2"/>
+            </Grid>
         </Grid>
 
         <!--Uncomment to see an alignment grid to help ensure your controls are
