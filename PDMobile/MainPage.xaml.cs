@@ -32,6 +32,37 @@ namespace PDMobile
             {
                 MessageBox.Show("Accelerometer has not been found on phone. So we can not collect the required data.");
             }
+
+            createAppBar();
+        }
+
+        private void createAppBar()
+        {
+            ApplicationBar = new ApplicationBar();
+            ApplicationBar.Mode = ApplicationBarMode.Default;
+            ApplicationBar.Opacity = 1.0;
+            ApplicationBar.IsVisible = true;
+            ApplicationBar.IsMenuEnabled = true;
+
+            ApplicationBarMenuItem syncBtn = new ApplicationBarMenuItem();
+            syncBtn.Text = "Send Data";
+            ApplicationBar.MenuItems.Add(syncBtn);
+            syncBtn.Click += syncBtn_Click;
+
+            ApplicationBarMenuItem aboutBtn = new ApplicationBarMenuItem();
+            aboutBtn.Text = "About";
+            ApplicationBar.MenuItems.Add(aboutBtn);
+            aboutBtn.Click += aboutBtn_Click;
+        }
+
+        void aboutBtn_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        void syncBtn_Click(object sender, EventArgs e)
+        {
+            
         }
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
