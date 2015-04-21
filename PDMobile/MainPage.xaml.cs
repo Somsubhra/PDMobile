@@ -33,7 +33,7 @@ namespace PDMobile
                 MessageBox.Show("Accelerometer has not been found on phone. So we can not collect the required data.");
             }
 
-            createAppBar();
+            // createAppBar();
         }
 
         private void createAppBar()
