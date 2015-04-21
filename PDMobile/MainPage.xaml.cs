@@ -45,7 +45,7 @@ namespace PDMobile
             ApplicationBar.IsMenuEnabled = true;
 
             ApplicationBarMenuItem syncBtn = new ApplicationBarMenuItem();
-            syncBtn.Text = "Send Data";
+            syncBtn.Text = "Sync Data";
             ApplicationBar.MenuItems.Add(syncBtn);
             syncBtn.Click += syncBtn_Click;
 
